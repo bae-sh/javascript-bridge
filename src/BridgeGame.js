@@ -2,6 +2,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { print } = require('./util');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -39,7 +40,7 @@ class BridgeGame {
             }
           }
         } else {
-          throw new Error('U, D 만 입력 가능 합니다.');
+          throw new Error('[ERROR] U, D 만 입력 가능 합니다.');
         }
       },
     });
@@ -63,9 +64,9 @@ class BridgeGame {
   }
 
   setBridge(size) {
+    print('');
     this.size = size;
     this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    console.log(this.bridge);
     this.trace = [];
     this.move();
   }
