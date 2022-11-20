@@ -1,3 +1,4 @@
+const { printResult } = require('./OutputView');
 const { readLine, print, close } = require('./util');
 
 /**
@@ -24,10 +25,11 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand({ func }) {
-    readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', type => {
-      if (type === 'Q') close();
-      else if (type === 'R') func();
+  readGameCommand({ func, that }) {
+    readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', type => {
+      if (type === 'Q') {
+        printResult({ that, IS_SUCCESS: false });
+      } else if (type === 'R') func();
     });
   },
 };
