@@ -6,5 +6,7 @@ const print = content => {
 const readLine = (content, func) => {
   Console.readLine(content, func);
 };
-
-module.exports = { print, readLine };
+const close = () => {
+  Console.close();
+};
+module.exports = { print, readLine, close };

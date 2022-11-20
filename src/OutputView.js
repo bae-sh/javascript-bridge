@@ -1,3 +1,5 @@
+const { print } = require('./util');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -7,24 +9,18 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, positon) {
-    const [upBridge, downBridge] = bridge;
-    print(
-      `[${upBridge
-        .map((answer, index) => {
-          if (index <= positon) return ` ${answer} `;
-          return '   ';
-        })
-        .join('|')}]\ns`,
-    );
-    print(
-      `[${downBridge
-        .map((answer, index) => {
-          if (index <= positon) return ` ${answer} `;
-          return '   ';
-        })
-        .join('|')}]\ns`,
-    );
+  printMap({ bridge, trace, positon }) {
+    const order = ['U', 'D'];
+    bridge.forEach((currentBridge, orderIndex) => {
+      print(
+        `[${[...currentBridge]
+          .map((answer, index) => {
+            if (index <= positon && trace[index] === order[orderIndex]) return ` ${answer} `;
+            return '   ';
+          })
+          .join('|')}]\n`,
+      );
+    });
   },
 
   /**
