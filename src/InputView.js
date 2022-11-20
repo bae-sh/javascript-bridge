@@ -1,3 +1,4 @@
+const BridgeGame = require('./BridgeGame');
 const { readLine } = require('./util');
 
 /**
@@ -7,7 +8,12 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    print('다리 건너기 게임을 시작합니다.');
+    readLine('다리의 길이를 입력해주세요.', size => {
+      readMoving(new BridgeGame(size));
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
