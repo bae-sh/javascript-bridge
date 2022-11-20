@@ -22,13 +22,11 @@ class BridgeGame {
       func: type => {
         const IS_UP = type === 'U';
         const IS_DOWN = type === 'D';
-        const IS_CORRECT =
-          (IS_UP && this.bridge[0][this.position] === 'O') ||
-          (IS_DOWN && this.bridge[1][this.position] === 'O');
-        this.trace[this.position] = type;
+        const IS_CORRECT = type === this.bridge[this.position];
+        this.trace.push(type);
 
         if (IS_UP || IS_DOWN) {
-          OutputView.printMap({ bridge: this.bridge, trace: this.trace, positon: this.position });
+          OutputView.printMap({ bridge: this.bridge, positon: this.position, trace: this.trace });
           if (!IS_CORRECT) this.retry();
           else {
             const IS_SUCCESS = this.position === this.size - 1;
@@ -57,7 +55,7 @@ class BridgeGame {
       func: () => {
         this.position = 0;
         this.tryCount += 1;
-        this.trace = new Array(this.size).fill(' ');
+        this.trace = [];
         this.move();
       },
       that: this,
@@ -67,7 +65,8 @@ class BridgeGame {
   setBridge(size) {
     this.size = size;
     this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.trace = new Array(size).fill(' ');
+    console.log(this.bridge);
+    this.trace = [];
     this.move();
   }
 }
