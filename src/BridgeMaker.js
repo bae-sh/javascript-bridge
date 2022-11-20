@@ -10,7 +10,6 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const upBridge = new Array(size).fill('X');
     const downBridge = new Array(size).fill('X');
-
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
       const IS_UPPER_CORRECT = randomNumber === 1;
